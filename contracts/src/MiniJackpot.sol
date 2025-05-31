@@ -11,7 +11,7 @@ library JackpotErrors {
 
 contract MiniJackpot is IEntropyConsumer {
     event JackpotEntered(uint64 sequenceNumber, address indexed player);
-    event JackpotResult(uint64 sequenceNumber, address indexed player, bool won, uint256 prize);
+    event JackpotResult(uint64 sequenceNumber, address indexed player, bool won, uint256 prize, uint256 randomNumber);
 
     IEntropy private entropy;
     address private entropyProvider;
@@ -31,7 +31,7 @@ contract MiniJackpot is IEntropyConsumer {
             revert JackpotErrors.InsufficientFee();
         }
 
-        jackpotPool += msg.value;
+        jackpotPool += msg.value - fee;
 
         uint64 sequenceNumber = entropy.requestWithCallback{value: fee}(
             entropyProvider,
@@ -56,9 +56,9 @@ contract MiniJackpot is IEntropyConsumer {
             jackpotPool = 0;
             payable(player).transfer(prize);
 
-            emit JackpotResult(sequenceNumber, player, true, prize);
+            emit JackpotResult(sequenceNumber, player, true, prize, uint256(randomNumber));
         } else {
-            emit JackpotResult(sequenceNumber, player, false, 0);
+            emit JackpotResult(sequenceNumber, player, false, 0, uint256(randomNumber));
         }
 
         delete requestToPlayer[sequenceNumber];
