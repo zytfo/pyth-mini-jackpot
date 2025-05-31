@@ -35,7 +35,7 @@ contract MiniJackpot is IEntropyConsumer {
 
         uint64 sequenceNumber = entropy.requestWithCallback{value: fee}(
             entropyProvider,
-            bytes32(uint256(uint160(msg.sender)))
+            userRandomNumber
         );
 
         requestToPlayer[sequenceNumber] = msg.sender;
