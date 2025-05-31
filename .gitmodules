@@ -1,0 +1,6 @@
+[submodule "contract/mini-jackpot/lib/forge-std"]
+	path = contract/mini-jackpot/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "mini-jackpot/contracts/lib/forge-std"]
+	path = mini-jackpot/contracts/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
