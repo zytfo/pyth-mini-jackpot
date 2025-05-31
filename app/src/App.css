@@ -1,0 +1,248 @@
+/* Full-screen responsive layout */
+html,
+body,
+.game-container {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(ellipse at center, #1a1a2e 0%, #0f0f1e 100%);
+  color: #ffffff;
+  font-family: "Orbitron", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: scroll;
+}
+
+/* Center content */
+.game-core {
+  text-align: center;
+}
+
+/* Game title */
+.game-title {
+  font-size: 3rem;
+  color: #00ffe5;
+  text-shadow: 0 0 10px #00ffe5, 0 0 20px #00ffe5;
+  margin-bottom: 0.5rem;
+}
+
+.prizepool-container {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  margin-top: 30px;
+}
+
+/* Big number */
+.game-number {
+  font-size: 8rem;
+  font-weight: bold;
+  color: #fffb00;
+  text-shadow: 0 0 10px #fffb00, 0 0 10px #ffd900;
+  margin-bottom: 1rem;
+}
+
+.game-result {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  margin-top: 30px;
+}
+
+.game-won {
+  font-size: 8rem;
+  font-weight: bold;
+  color: #0af806;
+  text-shadow: 0 0 20px #0af806, 0 0 40px #4ff806;
+  margin-bottom: 1rem;
+}
+
+.prize-money {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.game-lost {
+  font-size: 8rem;
+  font-weight: bold;
+  color: #ec0101;
+  text-shadow: 0 0 20px #ec0101, 0 0 40px #b90327;
+}
+
+.no-wallet {
+  font-size: 8rem;
+  font-weight: bold;
+  color: #ec0101;
+  text-shadow: 0 0 20px #ec0101, 0 0 40px #b90327;
+  margin-bottom: 1rem;
+}
+
+.entries {
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.game-subtext {
+  font-size: 1.5rem;
+  color: #ffffffaa;
+  font-style: italic;
+}
+
+/* Make WalletCon card float in top-left */
+.wallet-card {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+}
+
+/* Optional: Import a gamey font */
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap");
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.game-input {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.neon-button {
+  cursor: pointer;
+  font-family: "Orbitron", sans-serif;
+  position: relative;
+  background: transparent;
+  border: none;
+  display: inline-block;
+  padding: 25px 30px;
+  margin-bottom: 20px;
+  color: #03e9f4;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.5s;
+  letter-spacing: 4px;
+  overflow: hidden;
+}
+.neon-button:hover {
+  background: #03e9f4;
+  color: #050801;
+  box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
+    0 0 200px #03e9f4;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+}
+
+.neon-button span {
+  position: absolute;
+  display: block;
+}
+.neon-button span:nth-child(1) {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #03e9f4);
+  animation: animate1 1s linear infinite;
+}
+@keyframes animate1 {
+  0% {
+    left: -100%;
+  }
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+.neon-button span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #03e9f4);
+  animation: animate2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+@keyframes animate2 {
+  0% {
+    top: -100%;
+  }
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+.neon-button span:nth-child(3) {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #03e9f4);
+  animation: animate3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+@keyframes animate3 {
+  0% {
+    right: -100%;
+  }
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+.neon-button span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #03e9f4);
+  animation: animate4 1s linear infinite;
+  animation-delay: 0.75s;
+}
+@keyframes animate4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,
+  100% {
+    bottom: 100%;
+  }
+}
+
+.neon-input {
+  font-family: "Orbitron", sans-serif;
+  position: relative;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 15px 20px;
+  margin-top: 20px;
+  color: #03e9f4;
+  font-size: 16px;
+  letter-spacing: 2px;
+  border: 2px solid #03e9f4;
+  box-shadow: 0 0 5px #03e9f4, 0 0 10px #03e9f4;
+  transition: 0.3s;
+  width: 100%;
+  max-width: 300px;
+}
+
+.neon-input::placeholder {
+  color: #03e9f4aa;
+  opacity: 0.7;
+  font-family: "Orbitron", sans-serif;
+}
+
+.neon-input:focus {
+  box-shadow: 0 0 10px #03e9f4, 0 0 20px #03e9f4, 0 0 40px #03e9f4;
+}
