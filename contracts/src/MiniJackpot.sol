@@ -16,7 +16,6 @@ contract MiniJackpot is IEntropyConsumer {
     IEntropy private entropy;
     address private entropyProvider;
 
-    uint256 public constant ENTRY_FEE = 0.005 ether;
     uint256 public jackpotPool;
 
     mapping(uint64 => address) public requestToPlayer;
@@ -26,10 +25,13 @@ contract MiniJackpot is IEntropyConsumer {
         entropyProvider = _provider;
     }
 
-    function play() external payable {
+    function play(bytes32 userRandomNumber) external payable {
         uint256 fee = entropy.getFee(entropyProvider);
+        if (msg.value < fee) {
+            revert JackpotErrors.InsufficientFee();
+        }
 
-        jackpotPool += ENTRY_FEE;
+        jackpotPool += msg.value;
 
         uint64 sequenceNumber = entropy.requestWithCallback{value: fee}(
             entropyProvider,
@@ -62,8 +64,8 @@ contract MiniJackpot is IEntropyConsumer {
         delete requestToPlayer[sequenceNumber];
     }
 
-    function getFee() public view returns (uint256) {
-        return entropy.getFee(entropyProvider);
+    function getFee() public view returns (uint256 fee) {
+        fee = entropy.getFee(entropyProvider);
     }
 
     function getEntropy() internal view override returns (address) {
